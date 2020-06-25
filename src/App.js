@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import RemainingList from './components/RemainingItems';
+
 function App() {
   return (
     <div>
@@ -9,6 +11,7 @@ function App() {
           to-do
         </h1>
       </header>
+      <RemainingList />
     </div>
   );
 }
