@@ -2,9 +2,10 @@ import React from 'react';
 
 import Item from './Item'
 
-function ItemsList() {
+function ItemsList({ items, removeItem }) {
   return (
     <div>
+      {items.map((item, index) => <Item key={index} text={item} />)}
     </div>
   );
 }
