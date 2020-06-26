@@ -17,7 +17,7 @@ function Input({ addNewItem }) {
   return (
     <form onSubmit={handleSubmit}>
       <input onChange={handleChange} value={inputValue} />
-      <button type='submit'>TUVIEJA</button>
+      <button type='submit'>SUBMIT</button>
     </form>
   );
 }
