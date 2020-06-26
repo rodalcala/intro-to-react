@@ -1,8 +1,9 @@
 import React from 'react';
 
-function Item() {
+function Item({ text }) {
   return (
     <div>
+      {text}
     </div>
   );
 }
