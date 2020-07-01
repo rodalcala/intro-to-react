@@ -10,11 +10,9 @@ function reducer(state, action) {
     case 'ADD_ITEM':
       return [...state, action.item];
     case 'COMPLETE_ITEM':
-      const newState = [...state];
-      newState.splice(action.itemIndex, 1);
-      return newState
+      return state.filter((item) => !(item === action.completedItem));
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -25,8 +23,8 @@ function RemainingItems() {
     dispatch({ type: 'ADD_ITEM' , item });
   }
 
-  function removeItem(itemIndex) {
-    dispatch({ type: 'COMPLETE_ITEM' , itemIndex });
+  function removeItem(completedItem) {
+    dispatch({ type: 'COMPLETE_ITEM' , completedItem });
   }
 
   return (
