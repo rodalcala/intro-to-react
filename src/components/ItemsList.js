@@ -2,11 +2,9 @@ import React from 'react';
 
 import Item from './Item'
 
-function ItemsList({ items, removeItem }) {
-  return (
-    <div>
-      {items.map((item, index) => <Item removeItem={removeItem} key={index} text={item} />)}
-    </div>
+function ItemsList({ renderCompleted = false, items, toggleItem }) {
+  return items.map((item, index) =>
+    item.completed === renderCompleted && <Item toggleItem={toggleItem} key={index} item={item} />
   );
 }
 

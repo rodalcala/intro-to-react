@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Item({ text, removeItem }) {
+function Item({ item, toggleItem }) {
   return (
-    <div onClick={() => removeItem(text)}>
-      {text}
+    <div onClick={() => toggleItem(item)}>
+      {item.text}
     </div>
   );
 }

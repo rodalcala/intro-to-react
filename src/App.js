@@ -8,9 +8,11 @@ const initialState = [];
 function reducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM':
-      return [...state, action.item];
-    case 'COMPLETE_ITEM':
-      return state.filter((item) => !(item === action.completedItem));
+      return [...state, { text: action.itemText, completed: false }];
+    case 'TOGGLE_ITEM':
+      return state.map((item) =>
+        item.text === action.item.text ? { ...item, completed: !item.completed } : item
+      );
     default:
       return state;
   }
@@ -19,12 +21,12 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function addNewItem(item) {
-    dispatch({ type: 'ADD_ITEM' , item });
+  function addNewItem(itemText) {
+    dispatch({ type: 'ADD_ITEM' , itemText });
   }
 
-  function removeItem(completedItem) {
-    dispatch({ type: 'COMPLETE_ITEM' , completedItem });
+  function toggleItem(item) {
+    dispatch({ type: 'TOGGLE_ITEM' , item });
   }
 
   return (
@@ -34,7 +36,7 @@ function App() {
           to-do
         </h1>
       </header>
-      <RemainingList state={state} addNewItem={addNewItem} removeItem={removeItem} />
+      <RemainingList state={state} addNewItem={addNewItem} toggleItem={toggleItem} />
     </div>
   );
 }
