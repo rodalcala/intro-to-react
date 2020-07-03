@@ -1,7 +1,8 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import './App.css';
 
-import RemainingList from './components/RemainingItems';
+import RemainingItems from './components/RemainingItems';
+import CompletedItems from './components/CompletedItems';
 
 const initialState = [];
 
@@ -20,13 +21,18 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   function addNewItem(itemText) {
-    dispatch({ type: 'ADD_ITEM' , itemText });
+    dispatch({ type: 'ADD_ITEM', itemText });
   }
 
   function toggleItem(item) {
-    dispatch({ type: 'TOGGLE_ITEM' , item });
+    dispatch({ type: 'TOGGLE_ITEM', item });
+  }
+
+  function toggleView() {
+    setShowCompleted(e => !e);
   }
 
   return (
@@ -36,7 +42,14 @@ function App() {
           to-do
         </h1>
       </header>
-      <RemainingList state={state} addNewItem={addNewItem} toggleItem={toggleItem} />
+      {
+        showCompleted
+        ? <CompletedItems state={state} toggleItem={toggleItem} />
+        : <RemainingItems state={state} addNewItem={addNewItem} toggleItem={toggleItem} />
+      }
+      <button onClick={toggleView}>
+        {showCompleted ? 'SHOW REMAINING ITEMS' : 'SHOW COMPLETED ITEMS'}
+      </button>
     </div>
   );
 }
