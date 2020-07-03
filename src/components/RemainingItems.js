@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { addNewItem, toggleItem } from '../redux/actions';
 
 import ItemsList from './ItemsList'
 import Input from './Input'
@@ -12,4 +15,7 @@ function RemainingItems({ state, addNewItem, toggleItem }) {
   );
 }
 
-export default RemainingItems;
+const mapStateToProps = (state) => ({ state })
+const mapDispatchToProps = { addNewItem, toggleItem };
+
+export default connect(mapStateToProps, mapDispatchToProps)(RemainingItems);

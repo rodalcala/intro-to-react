@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { toggleItem } from '../redux/actions';
 
 import ItemsList from './ItemsList'
 
@@ -10,4 +13,7 @@ function CompletedItems({ state, toggleItem }) {
   );
 }
 
-export default CompletedItems;
+const mapStateToProps = (state) => ({ state })
+const mapDispatchToProps = { toggleItem };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompletedItems);
